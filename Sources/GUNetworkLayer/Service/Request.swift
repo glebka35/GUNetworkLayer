@@ -10,12 +10,12 @@ import Foundation
 
 public struct Request {
     var headers: HTTPHeaders?
-    var boundary: String
+    var boundary: String?
     var path: String
     var httpMethod: HTTPMethod
     var task: HTTPTask
 
-    public init(headers: HTTPHeaders?, boundary: String, path: String, httpMethod: HTTPMethod, task: HTTPTask) {
+    public init(headers: HTTPHeaders?, boundary: String?, path: String, httpMethod: HTTPMethod, task: HTTPTask) {
         self.headers = headers
         self.boundary = boundary
         self.path = path
