@@ -9,7 +9,7 @@
 import Foundation
 
 public struct Response {
-    let data: Data?
-    let statusCode: Int
-    let headers: [AnyHashable: Any]
+    public let data: Data?
+    public let statusCode: Int
+    public let headers: [AnyHashable: Any]
 }
