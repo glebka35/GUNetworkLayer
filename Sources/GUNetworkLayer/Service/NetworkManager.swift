@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 public typealias NetworkCompletion = (_ apiResponse: Response?, _ error: Error?)->()
 
