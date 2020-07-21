@@ -10,6 +10,6 @@ import Foundation
 
 public typealias NetworkCompletion = (_ apiResponse: Response?, _ error: Error?)->()
 
-protocol NetworkManager {
+public protocol NetworkManager {
     func execute(request: Request, with completion: @escaping NetworkCompletion)
 }

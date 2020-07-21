@@ -8,16 +8,16 @@
 
 import Foundation
 
-class ApiClient: NetworkManager {    
-    private var clientSettingsProvider: ClientSettingsProviderProtocol
+public class ApiClient: NetworkManager {    
+    public var clientSettingsProvider: ClientSettingsProviderProtocol
         
 //    MARK: - API usage with request and settings
     
-    init(provider: ClientSettingsProviderProtocol) {
+    public init(provider: ClientSettingsProviderProtocol) {
         clientSettingsProvider = provider
     }
     
-    func execute(request: Request, with completion: @escaping (_ apiResponse: Response?, _ error: Error?)->()) {
+    public func execute(request: Request, with completion: @escaping (_ apiResponse: Response?, _ error: Error?)->()) {
         performRequest(request) { data, response, error in
             if let response = response as? HTTPURLResponse {
                 let apiResponse = Response(data: data, statusCode: response.statusCode, headers: response.allHeaderFields)

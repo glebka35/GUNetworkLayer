@@ -10,4 +10,8 @@ import Foundation
 
 public struct ClientSettings {
     var baseHeaders: HTTPHeaders?
+
+    public init(baseHeaders: HTTPHeaders?) {
+        self.baseHeaders = baseHeaders
+    }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ClientSettingsProviderProtocol {
+public protocol ClientSettingsProviderProtocol {
     var settings: ClientSettings { get }
     var baseURL: URL { get }
 }
