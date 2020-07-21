@@ -1,3 +1,3 @@
 # GUNetworkLayer
 
-A description of this package.
+Package, that provide networking usage in iOS apps.
