@@ -16,7 +16,3 @@ public enum NetworkError : String, Error {
     case missingURL = "URL is nil."
     case missingProvider = "Provider is nil"
 }
-
-public protocol ParameterEncoder {
-    static func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws
-}
