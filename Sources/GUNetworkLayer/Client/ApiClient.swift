@@ -81,7 +81,9 @@ public class ApiClient: NetworkManager {
             if let bodyContentType = bodyContentType {
                 try bodyContentType.encode(urlRequest: &request, bodyParameters: bodyParameters)
             } else {
-                try HTTPBodyContentType.jsonEncoded.encode(urlRequest: &request, bodyParameters: bodyParameters)
+                if let bodyParameters = bodyParameters {
+                    try HTTPBodyContentType.jsonEncoded.encode(urlRequest: &request, bodyParameters: bodyParameters)
+                }
             }
 
             if let urlParameters = urlParameters {
