@@ -10,11 +10,7 @@ import Foundation
 public enum HTTPBodyContentType {
     case urlEncoded
     case jsonEncoded
-    case multipartFormData(
-        boundary: String,
-        data: Data,
-        mimeType: String,
-        filename: String)
+    case multipartFormData
 
     func encode(urlRequest: inout URLRequest,
                 bodyParameters: Parameters?) throws {
@@ -24,8 +20,8 @@ public enum HTTPBodyContentType {
                 try JSONParameterEncoder.encode(urlRequest: &urlRequest, with: bodyParameters)
             case .urlEncoded:
                 try URLParameterEncoder.encode(urlRequest: &urlRequest, with: bodyParameters, isBody: true)
-            case .multipartFormData(let boundary, let data, let mimeType, let filename):
-                FormDataParameterEncoder.encode(urlRequest: &urlRequest, with: bodyParameters, boundary: boundary, data: data, mimeType: mimeType, filename: filename)
+            case .multipartFormData:
+                FormDataParameterEncoder.encode(urlRequest: &urlRequest, with: bodyParameters)
             }
         }
     }

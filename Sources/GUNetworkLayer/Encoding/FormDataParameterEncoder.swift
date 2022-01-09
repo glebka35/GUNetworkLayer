@@ -7,24 +7,36 @@
 
 import Foundation
 
-public struct FormDataParameterEncoder {
-    public static func encode(urlRequest: inout URLRequest, with parameters: Parameters?, boundary: String, data: Data, mimeType: String, filename: String) {
-        let body = NSMutableData()
+public enum MultiPartDataKeys: String {
+    case boundary
+    case key
+    case fileName
+    case type
+    case value
+}
 
+public struct FormDataParameterEncoder {
+    public static func encode(urlRequest: inout URLRequest, with parameters: Parameters?) {
+        guard
+            let parameters = parameters,
+            let boundary = parameters[MultiPartDataKeys.boundary.rawValue] as? String
+        else { return }
+
+        let body = NSMutableData()
         let boundaryPrefix = "--\(boundary)\r\n"
 
-        if let parameters = parameters {
-            for (key, value) in parameters {
-                body.appendString(boundaryPrefix)
-                body.appendString("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
-                body.appendString("\(value)\r\n")
-            }
+        body.appendString(boundaryPrefix)
+        if let key = parameters[MultiPartDataKeys.key.rawValue] as? String,
+           let fileName = parameters[MultiPartDataKeys.fileName.rawValue]{
+            body.appendString("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(fileName)\"\r\n")
+        }
+        if let type = parameters[MultiPartDataKeys.type.rawValue] as? String {
+            body.appendString("Content-Type: \(type)\r\n\r\n")
+        }
+        if let value = parameters[MultiPartDataKeys.value.rawValue] as? Data {
+            body.append(value)
         }
 
-        body.appendString(boundaryPrefix)
-        body.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
-        body.appendString("Content-Type: \(mimeType)\r\n\r\n")
-        body.append(data)
         body.appendString("\r\n")
         body.appendString("--".appending(boundary.appending("--")))
 
