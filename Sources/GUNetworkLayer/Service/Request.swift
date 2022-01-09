@@ -9,9 +9,9 @@
 import Foundation
 
 public struct Request {
-    var path: String
-    var httpMethod: HTTPMethod
-    var task: HTTPTask
+    let path: String
+    let httpMethod: HTTPMethod
+    let task: HTTPTask
 
     public init(path: String, httpMethod: HTTPMethod, task: HTTPTask) {
         self.path = path
